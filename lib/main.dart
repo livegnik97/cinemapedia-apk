@@ -1,14 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'config/certificates/remove_certificate.dart';
 import 'config/router/router.dart';
 import 'config/theme/app_theme.dart';
-import 'presentation/screens/home_screen/home_screen.dart';
 
-void main() {
+void main() async {
   HttpOverrides.global = MyHttpOverrides();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
