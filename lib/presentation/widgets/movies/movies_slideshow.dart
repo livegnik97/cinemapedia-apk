@@ -58,7 +58,7 @@ class _Slide extends StatelessWidget {
         decoration: decoration,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: WidgetsGI.ImageNetworkGI(movie.backdropPath),
+          child: WidgetsGI.CacheImageNetworkGI(movie.backdropPath),
         ),
       ),
     );

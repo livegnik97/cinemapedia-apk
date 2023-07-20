@@ -1,7 +1,5 @@
-import 'package:cinemapedia/config/constants/environment.dart';
-import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:cinemapedia/infrastucture/models/moviedb/movie_details.dart';
-import 'package:dio/dio.dart';
+import 'package:Cinemapedia/domain/entities/movie.dart';
+import 'package:Cinemapedia/infrastucture/models/moviedb/movie_details.dart';
 
 import '../../domain/datasources/movies_datasource.dart';
 import '../mappers/movie_mapper.dart';
@@ -13,9 +11,9 @@ class MovieDbDatasource extends MoviesDataSource {
   List<Movie> _jsonToMovies(Map<String,dynamic> json) {
     final movieDbResponse = MovieDbResponse.fromJson(json);
     return movieDbResponse.results
-    .map((e) => MovieMapper.movieDBToEntity(e))
-    .where((element) => element.posterPath != 'no-poster')
-    .toList();
+      .map((e) => MovieMapper.movieDBToEntity(e))
+      // .where((element) => element.posterPath != 'no-poster')
+      .toList();
   }
 
   @override
@@ -62,5 +60,16 @@ class MovieDbDatasource extends MoviesDataSource {
 
     final movieDB = MovieDetails.fromJson(res.data);
     return MovieMapper.movieDetailsToEntity(movieDB);
+  }
+
+  @override
+  Future<List<Movie>> searchMovies(String query) async {
+    if(query.isEmpty) return [];
+
+    final res = await dio.get("/search/movie",
+    queryParameters: {
+      'query': query
+    });
+    return _jsonToMovies(res.data);
   }
 }

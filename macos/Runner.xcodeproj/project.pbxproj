@@ -217,7 +217,7 @@
 			);
 			name = Runner;
 			productName = Runner;
-			productReference = 33CC10ED2044A3C60003C045 /* cinemapedia.app */;
+			productReference = 33CC10ED2044A3C60003C045 /* Cinemapedia.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

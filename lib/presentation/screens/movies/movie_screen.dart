@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/helpers/widgets_gi.dart';
 import '../../../domain/entities/actor.dart';
 import '../../../domain/entities/movie.dart';
+import '../../widgets/shared/custom_popup.dart';
 import '../providers/providers.dart';
 
 class MovieScreen extends ConsumerStatefulWidget {
@@ -47,21 +48,83 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
     }
 
     return Scaffold(
-      body: CustomScrollView(
-        physics: const ClampingScrollPhysics(),
-        slivers: [
-          _CustomSliverAppBar(movie: movie),
-          SliverList(
-            delegate:SliverChildBuilderDelegate(
-              (context, index) => _MovieDetails(movie: movie),
-              childCount: 1,
-            ),
-          )
-        ],
+      body: Stack(
+        children: [
+          CustomScrollView(
+            physics: const ClampingScrollPhysics(),
+            slivers: [
+              _CustomSliverAppBar(movie: movie),
+              SliverList(
+                delegate:SliverChildBuilderDelegate(
+                  (context, index) => _MovieDetails(movie: movie),
+                  childCount: 1,
+                ),
+              )
+            ],
+          ),
+        ]
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+
+          List<PopupItemGI> items = [
+              PopupItemGI(
+                icon: Icons.add_rounded,
+                label: "Adicional",
+                onTap: (){},
+              ),
+              PopupItemGI(
+                icon: Icons.camera_alt_rounded,
+                label: "Cámara",
+                onTap: (){},
+              ),
+              PopupItemGI(
+                icon: Icons.add_rounded,
+                label: "Adicional",
+                onTap: (){},
+              ),
+              PopupItemGI(
+                icon: Icons.camera_alt_rounded,
+                label: "Cámara",
+                onTap: (){},
+              ),
+              PopupItemGI(
+                icon: Icons.add_rounded,
+                label: "Adicional",
+                onTap: (){},
+              ),
+              PopupItemGI(
+                icon: Icons.camera_alt_rounded,
+                label: "Cámara",
+                onTap: (){},
+              ),
+              PopupItemGI(
+                icon: Icons.add_rounded,
+                label: "Adicional",
+                onTap: (){},
+              ),
+              PopupItemGI(
+                icon: Icons.camera_alt_rounded,
+                label: "Cámara",
+                onTap: (){},
+              ),
+            ];
+
+          onDismiss(bool byUser) {
+          }
+
+          ShowPopupGI(context,
+            onDismiss: onDismiss,
+            items: items
+          );
+          // ref.read(isShowPopupProvider.notifier).state = true;
+        },
+        child: const Icon(Icons.menu),
       ),
     );
   }
 }
+
 
 class _CustomSliverAppBar extends StatelessWidget {
 
@@ -92,10 +155,7 @@ class _CustomSliverAppBar extends StatelessWidget {
           children: [
             SizedBox.expand(
               child: FadeIn(
-                child: Image.network(
-                  movie.posterPath,
-                  fit: BoxFit.cover,
-                ),
+                child: WidgetsGI.CacheImageNetworkGI(movie.posterPath),
               ),
             ),
             const SizedBox.expand(
@@ -157,10 +217,9 @@ class _MovieDetails extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Image.network(
+                  child: WidgetsGI.CacheImageNetworkGI(
                     width: size.width * 0.3,
-                    movie.posterPath,
-                    fit: BoxFit.cover,
+                    movie.posterPath
                   ),
                 ),
 
@@ -236,15 +295,13 @@ class _ActorsByMovie extends ConsumerWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: WidgetsGI.ImageNetworkGI(
+                    child: WidgetsGI.CacheImageNetworkGI(
                       actor.profilePath,
                       height: 180,
                       width: 135,
                     ),
                   ),
-          
                   const SizedBox(height: 5),
-          
                   Text(actor.name, maxLines: 2),
                   Text(actor.character ?? '',
                     maxLines: 2,

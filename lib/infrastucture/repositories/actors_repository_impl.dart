@@ -1,4 +1,4 @@
-import 'package:cinemapedia/domain/entities/actor.dart';
+import 'package:Cinemapedia/domain/entities/actor.dart';
 
 import '../../domain/datasources/actors_datasource.dart';
 import '../../domain/repositories/actors_repository.dart';

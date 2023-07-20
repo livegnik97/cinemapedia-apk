@@ -90,7 +90,7 @@ class _Slice extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child: GestureDetector(
                 onTap: () => context.push("/movie/${movie.id}"),
-                child: WidgetsGI.ImageNetworkGI(
+                child: WidgetsGI.CacheImageNetworkGI(
                   movie.posterPath,
                   width: 150
                 ),

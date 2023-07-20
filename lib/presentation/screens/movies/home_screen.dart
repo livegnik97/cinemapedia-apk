@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../domain/entities/movie.dart';
+import '../../delegates/search_movie_delegate.dart';
 import '../../widgets/shared/full_screen loader_percent.dart';
 import '../../widgets/widgets.dart';
 import '../providers/providers.dart';
 
 class HomeScreen extends StatelessWidget {
 
-  static const name = 'home-screnn';
+  static const name = 'home-screen';
 
   const HomeScreen({super.key});
 
@@ -50,11 +53,13 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final popularMovies = ref.watch(popularMoviesProvider);
     final upcomingMovies = ref.watch(upcomingMoviesProvider);
     final topMovies = ref.watch(topMoviesProvider);
+    final searchQuery = ref.watch(searchQueryProvider);
 
     return CustomScrollView(
       slivers: [
         SliverAppBar(
           floating: true,
+          titleSpacing: 0,
           centerTitle: false,
           leading: Icon(
             Icons.movie_outlined,
@@ -67,7 +72,23 @@ class _HomeViewState extends ConsumerState<_HomeView> {
           actions: [
             IconButton(
               icon: Icon(Icons.search),
-              onPressed: (){},
+              onPressed: () {
+                showSearch<Movie?>(
+                  query: searchQuery,
+                  context: context,
+                  delegate: SearchMovieDelegate(
+                    initialMovies: ref.read(searchedMoviesProvider),
+                    searchMovies: (query) {
+                      // ref.read(searchQueryProvider.notifier).state = query;
+                      // return movieRepository.searchMovies(query);
+                      return ref.read(searchedMoviesProvider.notifier).searchMoviesByQuery(query);
+                    }
+                  )
+                ).then((movie) {
+                  if(movie != null)
+                    context.push("/movie/${movie.id}");
+                });
+              },
             )
           ],
         ),

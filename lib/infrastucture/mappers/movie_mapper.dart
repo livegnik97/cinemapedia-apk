@@ -1,4 +1,4 @@
-import 'package:cinemapedia/infrastucture/models/moviedb/movie_details.dart';
+import 'package:Cinemapedia/infrastucture/models/moviedb/movie_details.dart';
 
 import '../../domain/entities/movie.dart';
 import '../models/moviedb/movie_moviedb.dart';
