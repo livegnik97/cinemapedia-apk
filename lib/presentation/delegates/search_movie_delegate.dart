@@ -146,7 +146,9 @@ class _MovieItem extends StatelessWidget {
                     height: size.width * 0.3,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: WidgetsGI.CacheImageNetworkGI(movie.posterPath),
+                      child: WidgetsGI.CacheImageNetworkGI(
+                        movie.posterPath,
+                      ),
                     )),
                 const SizedBox(width: 10),
                 SizedBox(

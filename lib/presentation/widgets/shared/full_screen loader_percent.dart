@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../screens/providers/movies/initial_loading_provider.dart';
+import '../../providers/movies/initial_loading_provider.dart';
 
 class FullScreenLoaderPercent extends ConsumerWidget {
   const FullScreenLoaderPercent({super.key});

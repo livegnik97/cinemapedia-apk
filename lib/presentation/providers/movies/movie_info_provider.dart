@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../domain/entities/movie.dart';
+import '../../../domain/entities/movie.dart';
 import '../providers.dart';
 
 final movieInfoProvider = StateNotifierProvider<MovieMapNotifier,Map<String,Movie>>(

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../config/helpers/human_formats.dart';
 import '../../../config/helpers/widgets_gi.dart';
+import '../../../config/router/router_path.dart';
 import '../../../domain/entities/movie.dart';
 
 class MovieHorizontalListView extends StatefulWidget {
@@ -89,7 +90,8 @@ class _Slice extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: GestureDetector(
-                onTap: () => context.push("/home/0/movie/${movie.id}"),
+                onTap: () => context.push(RouterPath.MOVIE_PAGE(movie.id)),
+                // onTap: () => context.push("/home/0/movie/${movie.id}"),
                 child: WidgetsGI.CacheImageNetworkGI(
                   movie.posterPath,
                   width: 150

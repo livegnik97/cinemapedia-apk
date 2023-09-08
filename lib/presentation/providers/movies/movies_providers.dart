@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../domain/entities/movie.dart';
+import '../../../domain/entities/movie.dart';
 import 'movies_repository_provider.dart';
 
 final nowPlayingMoviesProvider =

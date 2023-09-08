@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../config/router/router_path.dart';
 import '../../../domain/entities/movie.dart';
 import '../../delegates/search_movie_delegate.dart';
-import '../../screens/providers/providers.dart';
+import '../../providers/providers.dart';
 import '../../widgets/widgets.dart';
 
 class HomeView extends ConsumerStatefulWidget {
@@ -17,7 +18,7 @@ class HomeView extends ConsumerStatefulWidget {
   _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeViewState extends ConsumerState<HomeView> {
+class _HomeViewState extends ConsumerState<HomeView> with AutomaticKeepAliveClientMixin{
 
   @override
   void initState() {
@@ -29,7 +30,11 @@ class _HomeViewState extends ConsumerState<HomeView> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
 
     // final initialLoading = ref.watch(initLoadingProvider);
     // if(initialLoading) return const FullScreenLoaderPercent();
@@ -73,7 +78,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                   )
                 ).then((movie) {
                   if(movie != null)
-                    context.push("/movie/${movie.id}");
+                    context.push(RouterPath.MOVIE_PAGE(movie.id));
                 });
               },
             )

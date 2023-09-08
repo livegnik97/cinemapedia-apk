@@ -1,8 +1,20 @@
+import 'package:isar/isar.dart';
+
+// dart run build_runner build
+// flutter pub run build_runner build
+part 'movie.g.dart';
+
+@collection
 class Movie {
+  Id? isarId;
+
   final bool adult;
   final String backdropPath;
   final List<String> genreIds;
+
+  // @Index(unique: true)
   final int id;
+
   final String originalLanguage;
   final String originalTitle;
   final String overview;
